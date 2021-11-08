@@ -9,7 +9,7 @@ import {ThumbnailSellersComponent} from "../thumbnail-sellers/thumbnail-sellers.
 import {SellerService} from "../../services/seller.service";
 
 const EDIT_ICON = `
-<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
+<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px">
     <g>
         <rect fill="none" height="24" width="24"/>
     </g>
@@ -39,6 +39,9 @@ export class TableSellersComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.subscription = this.sellerService.invokeSeller$.subscribe(() => {
+      this.getSellers()
+    })
     this.getSellers();
   }
 
@@ -56,7 +59,6 @@ export class TableSellersComponent implements OnInit {
   }
 
   openEdit(data: Seller) {
-    console.log(data)
     this.dialog.open(EditComponent, {data})
   }
 

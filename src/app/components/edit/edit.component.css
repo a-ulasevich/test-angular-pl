@@ -13,6 +13,16 @@
   text-decoration: none;
 }
 
+:disabled {
+  background-color: white;
+}
+
+.alert div {
+  background-color: #fed3d3;
+  color: #820000;
+  border-radius: 0.25em;
+  padding-left: 0.25em;
+}
 
 h1 {
   font: bold 100% sans-serif;

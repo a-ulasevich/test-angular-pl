@@ -8,13 +8,26 @@
         <tr>
           <th><span>Invoice #</span></th>
           <td>
-            <input class="form__input" matInput name="id" ngModel placeholder="Invoice number" required type="text">
+            <input #id="ngModel" class="form__input" matInput name="id" ngModel placeholder="Invoice number" required
+                   type="text">
+            <div *ngIf="id.invalid && (id.dirty || id.touched)"
+                 class="alert">
+              <div *ngIf="id.errors?.['required']">
+                Id field is required.
+              </div>
+            </div>
           </td>
         </tr>
         <tr>
           <th><span>Date</span></th>
           <td>
-            <input class="form__input" matInput name="date" ngModel placeholder="Invoice date" required type="text">
+            <input class="form__input" matInput name="date" ngModel placeholder="Invoice date" required type="text" #date="ngModel">
+            <div *ngIf="date.invalid && (date.dirty || date.touched)"
+                 class="alert">
+              <div *ngIf="date.errors?.['required']">
+                Date field is required.
+              </div>
+            </div>
           </td>
         </tr>
         <tr>
@@ -26,22 +39,29 @@
             </select>
           </td>
         </tr>
-        <tr *ngIf="seller !== null">
+        <tr *ngIf="seller.id !== 0">
           <th><span>Seller ID</span></th>
           <td>
             {{seller.id}}
           </td>
         </tr>
-        <tr>
+        <tr *ngIf="seller.address !== ''">
           <th><span>Seller Address</span></th>
           <td>
             {{seller.address}}
           </td>
         </tr>
+
         <tr>
           <th><span>Amount</span></th>
           <td>
-            <input class="form__input" matInput name="amount" ngModel placeholder="Invoice amount" required type="text">
+            <input class="form__input" matInput name="amount" ngModel placeholder="Invoice amount" required type="text" #amount="ngModel">
+            <div *ngIf="amount.invalid && (amount.dirty || amount.touched)"
+                 class="alert">
+              <div *ngIf="amount.errors?.['required']">
+                Amount field is required.
+              </div>
+            </div>
           </td>
         </tr>
       </table>

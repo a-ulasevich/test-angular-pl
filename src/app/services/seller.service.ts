@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {Seller} from "../models/seller";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
@@ -8,6 +8,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 })
 export class SellerService {
 
+  invokeSellerSource = new Subject<void>();
+  invokeSeller$ = this.invokeSellerSource.asObservable();
   private sellersUrl = 'api/sellers';
   private httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})

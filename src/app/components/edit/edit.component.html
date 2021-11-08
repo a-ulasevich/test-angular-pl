@@ -9,25 +9,33 @@
           <th><span>Seller #</span></th>
           <td>
             <input
-              [(ngModel)]="id"
-              disabled
               name="id"
-              placeholder="Seller number"
               value="{{data.id}}"
+              disabled
             >
           </td>
         </tr>
         <tr>
           <th><span>Name</span></th>
           <td>
-            <input [(ngModel)]="name" name="name" placeholder="Seller name" required type="text" value="{{data.name}}">
+            <input [(ngModel)]="name" name="name" placeholder="Name" required type="text" value="{{data.name}}">
+            <div *ngIf="name.length === 0" class="alert">
+              <div>
+                Name field is required.
+              </div>
+            </div>
           </td>
         </tr>
         <tr>
           <th><span>Address</span></th>
           <td>
-            <input [(ngModel)]="address" matInput name="address" placeholder="Seller address" required type="text"
+            <input [(ngModel)]="address" matInput name="address" placeholder="Address" required type="text"
                    value="{{data.address}}">
+            <div *ngIf="address.length === 0" class="alert">
+              <div>
+                Address field is required.
+              </div>
+            </div>
           </td>
         </tr>
       </table>

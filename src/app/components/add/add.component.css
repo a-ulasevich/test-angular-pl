@@ -20,6 +20,13 @@ h1 {
   text-transform: uppercase;
 }
 
+.alert div {
+  background-color: #fed3d3;
+  color: #820000;
+  border-radius: 0.25em;
+  padding-left: 0.25em;
+}
+
 table {
   font-size: 75%;
   table-layout: fixed;

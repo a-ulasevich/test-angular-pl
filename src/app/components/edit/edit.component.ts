@@ -23,10 +23,12 @@ export class EditComponent implements OnInit {
 
   updateSeller(id: number, name: string, address: string): void {
     this.sellerService.updateSeller({id, name, address} as Seller)
+      .subscribe(() => {
+        this.sellerService.invokeSellerSource.next()
+      })
   }
 
   submit(form: NgForm) {
-    console.log(this.data.id, form.value.name, form.value.address)
     this.updateSeller(this.data.id, form.value.name, form.value.address);
   }
 }

@@ -17,7 +17,7 @@ export class TableComponent implements OnInit {
   invoices: Invoice[] = [];
   filteredInvoices: Invoice[] = [];
   sellers: Seller[] = [];
-  subscription: Subscription = new Subscription();
+  subscriptionInvoice: Subscription = new Subscription();
   filteredValue?: Seller;
   displayedColumns: string[] = ['id', 'name', 'amount'];
 
@@ -25,7 +25,7 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.subscription = this.invoiceService.invokeInvoice$.subscribe(() => {
+    this.subscriptionInvoice = this.invoiceService.invokeInvoice$.subscribe(() => {
       this.getInvoices()
     })
     this.getInvoices();
@@ -54,6 +54,6 @@ export class TableComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe()
+    this.subscriptionInvoice.unsubscribe()
   }
 }

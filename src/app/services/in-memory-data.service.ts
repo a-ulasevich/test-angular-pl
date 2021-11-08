@@ -34,7 +34,7 @@ export class InMemoryDataService implements InMemoryDbService {
       {id: 2, name: "GUEST", permissions: []}
     ];
 
-    const role: Role = rolesList[1];
+    const role: Role = rolesList[0];
 
     return {invoices, sellers, rolesList, role, permissions};
   }
