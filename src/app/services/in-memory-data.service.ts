@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import {Seller} from "../entities/seller";
 import {Invoice} from "../entities/invoice";
+import {Role} from "../entities/role";
 
 @Injectable({
   providedIn: 'root',
@@ -22,8 +23,19 @@ export class InMemoryDataService implements InMemoryDbService {
       {id: 4, date: "2021-05-31", seller: sellers[3], amount: 840},
       {id: 5, date: "2021-10-22", seller: sellers[4], amount: 14140}
     ];
-    const role: string[] = ["GUEST"];
 
-    return {invoices, sellers, role};
+    const permissions: string[] = [
+      "add",
+      "edit"
+    ];
+
+    const rolesList: Role[] = [
+      {id: 1, name: "ADMIN", permissions: [permissions[0], permissions[1]]},
+      {id: 2, name: "GUEST", permissions: []}
+    ];
+
+    const role: Role = rolesList[1];
+
+    return {invoices, sellers, rolesList, role, permissions};
   }
 }

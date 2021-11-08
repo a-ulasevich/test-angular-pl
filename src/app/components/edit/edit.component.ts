@@ -14,15 +14,10 @@ export class EditComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: Seller, private invoiceService: InvoiceService, private ngxPermissionsService: NgxPermissionsService) {}
 
-  ngOnInit() {
-    this.invoiceService.getRole()
-      .subscribe((role) => {this.role = role})
-    this.ngxPermissionsService.loadPermissions(this.role)
-  }
+  ngOnInit() {}
   id: number = this.data.id;
   name: string = this.data.name
   address: string = this.data.address;
-  role: string[] = [''];
 
   updateSeller(id: number, name: string, address: string): void {
     this.invoiceService.updateSeller({ id, name, address } as Seller)

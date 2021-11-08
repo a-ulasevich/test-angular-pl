@@ -30,6 +30,7 @@ import {TableSellersComponent} from './components/table-sellers/table-sellers.co
 import {EditComponent} from './components/edit/edit.component';
 import {ThumbnailSellersComponent } from './components/thumbnail-sellers/thumbnail-sellers.component';
 import {NgxPermissionsModule} from "ngx-permissions";
+import { AddRoleComponent } from './components/add-role/add-role.component';
 
 const routes: Routes = [
   { path: 'invoices', component: TableComponent},
@@ -46,7 +47,8 @@ const routes: Routes = [
     AddComponent,
     TableSellersComponent,
     EditComponent,
-    ThumbnailSellersComponent
+    ThumbnailSellersComponent,
+    AddRoleComponent
   ],
   imports: [
     NgxPermissionsModule.forRoot(),
