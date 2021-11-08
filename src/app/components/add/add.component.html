@@ -8,8 +8,8 @@
         <tr>
           <th><span>Invoice #</span></th>
           <td>
-            <input #id="ngModel" matInput name="id" ngModel placeholder="Invoice number" required
-                   type="text" pattern="[0-9]{1,10}">
+            <input #id="ngModel" matInput name="id" ngModel pattern="[0-9]{1,10}" placeholder="Invoice number"
+                   required type="text">
             <div *ngIf="id.invalid && (id.dirty || id.touched)"
                  class="alert">
               <div *ngIf="id.errors?.['required']">
@@ -24,8 +24,8 @@
         <tr>
           <th><span>Date</span></th>
           <td>
-            <input matInput name="date" ngModel placeholder="Invoice date"
-                   required type="date" #date="ngModel">
+            <input #date="ngModel" matInput name="date" ngModel
+                   placeholder="Invoice date" required type="date">
             <div *ngIf="date.invalid && (date.dirty || date.touched)"
                  class="alert">
               <div *ngIf="date.errors?.['required']">
@@ -62,9 +62,9 @@
         <tr>
           <th><span>Amount</span></th>
           <td>
-            <input matInput name="amount" ngModel placeholder="Invoice amount" required type="text"
-                   pattern="[0-9]{1,10}"
-                   #amount="ngModel">
+            <input #amount="ngModel" matInput name="amount" ngModel pattern="[0-9]{1,10}" placeholder="Invoice amount"
+                   required
+                   type="text">
             <div *ngIf="amount.invalid && (amount.dirty || amount.touched)"
                  class="alert">
               <div *ngIf="amount.errors?.['required']">
