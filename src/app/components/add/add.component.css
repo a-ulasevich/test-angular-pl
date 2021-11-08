@@ -27,6 +27,11 @@ h1 {
   padding-left: 0.25em;
 }
 
+.form-select {
+  width: 100%;
+  margin-left: -3px;
+}
+
 table {
   font-size: 75%;
   table-layout: fixed;
