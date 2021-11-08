@@ -1,9 +1,8 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {InvoiceService} from "../../services/invoice.service";
 import {Seller} from "../../entities/seller";
 import {NgForm} from "@angular/forms";
 import {Invoice} from "../../entities/invoice";
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-add',

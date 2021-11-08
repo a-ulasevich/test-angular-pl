@@ -3,7 +3,6 @@ import {Seller} from "../../entities/seller";
 import {InvoiceService} from "../../services/invoice.service";
 import {NgForm} from "@angular/forms";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
-import {Invoice} from "../../entities/invoice";
 import {NgxPermissionsService} from "ngx-permissions";
 
 @Component({

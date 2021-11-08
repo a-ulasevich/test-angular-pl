@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {MatIconRegistry} from "@angular/material/icon";
-import {DomSanitizer} from "@angular/platform-browser";
 import {MatDialog} from "@angular/material/dialog";
 import {InvoiceService} from "./services/invoice.service";
 import {NgxPermissionsService} from "ngx-permissions";
@@ -22,5 +20,5 @@ export class AppComponent implements OnInit{
         this.ngxPermissionsService.loadPermissions(role)
       })
   }
-  title = 'angular-test';
+  title = 'invoice-app';
 }
