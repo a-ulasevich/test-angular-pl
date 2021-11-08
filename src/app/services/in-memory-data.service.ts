@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import {Seller} from "./entities/seller";
-import {Invoice} from "./entities/invoice";
+import {Seller} from "../entities/seller";
+import {Invoice} from "../entities/invoice";
 
 @Injectable({
   providedIn: 'root',
@@ -9,11 +9,11 @@ import {Invoice} from "./entities/invoice";
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const sellers: Seller[] = [
-      {id: 1, name: "Sergey Bodrov", address: "Minsk"},
-      {id: 2, name: "Michael Jackson", address: "Toronto"},
-      {id: 3, name: "Max Butler", address: "Washington"},
-      {id: 4, name: "Edward Snowden", address: "Palo-Alto"},
-      {id: 5, name: "Denzel Curry", address: "Kyiv"},
+      {id: 1, name: "Kathleen Smith", address: "18257 Center Ave, Homewood, IL, 60430"},
+      {id: 2, name: "April Johnson", address: "192 Fisherman St, Opa Locka, FL, 33054 "},
+      {id: 3, name: "Gale Thompson", address: "40429 Trotter Ln, Dade City, FL, 33525"},
+      {id: 4, name: "Brenda Harris", address: "25246 S Tryon St, Channahon, IL, 60410"},
+      {id: 5, name: "Herbert Ritchie", address: "704 Southwick Apts, Southern Pines, NC, 28387"},
     ];
     const invoices: Invoice[] = [
       {id: 1, date: "2021-10-01", seller: sellers[0], amount: 1000},
@@ -22,6 +22,8 @@ export class InMemoryDataService implements InMemoryDbService {
       {id: 4, date: "2021-05-31", seller: sellers[3], amount: 840},
       {id: 5, date: "2021-10-22", seller: sellers[4], amount: 14140}
     ];
-    return {invoices, sellers};
+    const role: string[] = ["GUEST"];
+
+    return {invoices, sellers, role};
   }
 }

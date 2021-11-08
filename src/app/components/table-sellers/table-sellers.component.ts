@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import {Seller} from "../entities/seller";
+import {Component, Inject, OnInit} from '@angular/core';
+import {Seller} from "../../entities/seller";
 import {Subscription} from "rxjs";
-import {MatDialog} from "@angular/material/dialog";
-import {InvoiceService} from "../services/invoice.service";
+import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
+import {InvoiceService} from "../../services/invoice.service";
 import {ThumbnailComponent} from "../thumbnail/thumbnail.component";
 import {MatIconRegistry} from "@angular/material/icon";
 import {DomSanitizer} from "@angular/platform-browser";
 import {EditComponent} from "../edit/edit.component";
 import {ThumbnailSellersComponent} from "../thumbnail-sellers/thumbnail-sellers.component";
+import {NgxPermissionsService} from "ngx-permissions";
 
 const EDIT_ICON = `
 <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
@@ -30,7 +31,10 @@ export class TableSellersComponent implements OnInit {
   subscription: Subscription = new Subscription();
   dataSourceFilter: Seller[] = [];
   filteredValue: Seller = {id: 0, name: "", address: ""};
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, public dialog: MatDialog, private invoiceService: InvoiceService) {
+  role: string[] = ['test'];
+
+  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, public dialog: MatDialog,
+              private invoiceService: InvoiceService) {
     iconRegistry.addSvgIconLiteral('edit', sanitizer.bypassSecurityTrustHtml(EDIT_ICON))
   }
   ngOnInit(){
@@ -39,6 +43,7 @@ export class TableSellersComponent implements OnInit {
     })
     this.getSellers();
   }
+
 
   getSellers(): void {
     this.invoiceService.getSellers()

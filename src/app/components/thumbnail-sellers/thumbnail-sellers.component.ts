@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
-import {Seller} from "../entities/seller";
+import {Seller} from "../../entities/seller";
 
 @Component({
   selector: 'app-thumbnail-sellers',

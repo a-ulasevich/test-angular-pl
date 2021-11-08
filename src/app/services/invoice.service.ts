@@ -10,7 +10,8 @@ import {BehaviorSubject, Observable, Subject} from "rxjs";
 export class InvoiceService {
 
   private invoicesUrl = 'api/invoices';
-  private sellersUrl = 'api/sellers'
+  private sellersUrl = 'api/sellers';
+  private roleUrl = 'api/role';
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -37,6 +38,10 @@ export class InvoiceService {
 
   updateSeller(seller: Seller): Observable<Seller> {
     return this.http.put<Seller>(this.sellersUrl, seller, this.httpOptions);
+  }
+
+  getRole(): Observable<string[]> {
+    return this.http.get<string[]>(this.roleUrl);
   }
 
 }

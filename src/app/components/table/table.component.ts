@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {ThumbnailComponent} from "../thumbnail/thumbnail.component";
-import {InvoiceService} from "../services/invoice.service";
-import {Invoice} from "../entities/invoice";
+import {InvoiceService} from "../../services/invoice.service";
+import {Invoice} from "../../entities/invoice";
 import {Subscription} from "rxjs";
-import {Seller} from "../entities/seller";
+import {Seller} from "../../entities/seller";
 
 @Component({
   selector: 'app-table',
