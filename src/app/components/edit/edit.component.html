@@ -1,39 +1,40 @@
 <mat-dialog-content class="mat-typography">
-<header>
-  <h1>Edit Seller</h1>
-</header>
-<article>
-  <div ngForm #formElement="ngForm" >
-    <table class="meta">
-      <tr>
-        <th><span>Seller #</span></th>
-        <td>
-          <input
-            value="{{data.id}}"
-            disabled
-            placeholder="Seller number"
-            name="id"
-            [(ngModel)]="id"
-          >
-        </td>
-      </tr>
-      <tr>
-        <th><span>Name</span></th>
-        <td>
-          <input value="{{data.name}}" required type="text"placeholder="Seller name" name="name" [(ngModel)]="name">
-        </td>
-      </tr>
-      <tr>
-        <th><span>Address</span></th>
-        <td>
-          <input matInput value="{{data.address}}" required type="text" placeholder="Seller address" name="address" [(ngModel)]="address">
-        </td>
-      </tr>
-    </table>
-  </div>
-</article>
+  <header>
+    <h1>Edit Seller</h1>
+  </header>
+  <article>
+    <div #formElement="ngForm" ngForm>
+      <table class="meta">
+        <tr>
+          <th><span>Seller #</span></th>
+          <td>
+            <input
+              [(ngModel)]="id"
+              disabled
+              name="id"
+              placeholder="Seller number"
+              value="{{data.id}}"
+            >
+          </td>
+        </tr>
+        <tr>
+          <th><span>Name</span></th>
+          <td>
+            <input [(ngModel)]="name" name="name" placeholder="Seller name" required type="text" value="{{data.name}}">
+          </td>
+        </tr>
+        <tr>
+          <th><span>Address</span></th>
+          <td>
+            <input [(ngModel)]="address" matInput name="address" placeholder="Seller address" required type="text"
+                   value="{{data.address}}">
+          </td>
+        </tr>
+      </table>
+    </div>
+  </article>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button [disabled]="formElement.invalid" (click)="submit(formElement)" mat-dialog-close>Save</button>
+  <button (click)="submit(formElement)" [disabled]="formElement.invalid" mat-button mat-dialog-close>Save</button>
   <button mat-button mat-dialog-close>Cancel</button>
 </mat-dialog-actions>

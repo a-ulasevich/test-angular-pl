@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {ThumbnailComponent} from "../thumbnail/thumbnail.component";
 import {InvoiceService} from "../../services/invoice.service";
-import {Invoice} from "../../entities/invoice";
+import {Invoice} from "../../models/invoice";
 import {Subscription} from "rxjs";
-import {Seller} from "../../entities/seller";
+import {Seller} from "../../models/seller";
+import {SellerService} from "../../services/seller.service";
 
 @Component({
   selector: 'app-table',
@@ -13,14 +14,17 @@ import {Seller} from "../../entities/seller";
 })
 export class TableComponent implements OnInit {
 
-  dataSource: Invoice[] = [];
-  dataSourceFilter: Invoice[] = [];
+  invoices: Invoice[] = [];
+  filteredInvoices: Invoice[] = [];
   sellers: Seller[] = [];
   subscription: Subscription = new Subscription();
-  filteredValue: Seller = {id: 0, name: "", address: ""};
-  constructor(public dialog: MatDialog, private invoiceService: InvoiceService) {
+  filteredValue?: Seller;
+  displayedColumns: string[] = ['id', 'name', 'amount'];
+
+  constructor(private dialog: MatDialog, private invoiceService: InvoiceService, private sellerService: SellerService) {
   }
-  ngOnInit(){
+
+  ngOnInit() {
     this.subscription = this.invoiceService.invokeInvoice$.subscribe(() => {
       this.getInvoices()
     })
@@ -31,13 +35,13 @@ export class TableComponent implements OnInit {
   getInvoices(): void {
     this.invoiceService.getInvoices()
       .subscribe(invoices => {
-        this.dataSource = invoices
-        this.dataSourceFilter = invoices
+        this.invoices = invoices
+        this.filteredInvoices = invoices
       });
   }
 
   getSellers(): void {
-    this.invoiceService.getSellers()
+    this.sellerService.getSellers()
       .subscribe(sellers => this.sellers = sellers)
   }
 
@@ -46,17 +50,8 @@ export class TableComponent implements OnInit {
   }
 
   applyFilter() {
-
-    if (this.filteredValue !== undefined)
-    {
-      this.dataSource = this.dataSourceFilter.filter(invoice => invoice.seller.id === this.filteredValue.id)
-    }
-    else {
-      this.getInvoices()
-    }
+    this.filteredInvoices = this.filteredValue ? this.invoices.filter(invoice => invoice.seller.id === this.filteredValue?.id) : this.invoices
   }
-
-  displayedColumns: string[] = ['id', 'name', 'amount'];
 
   ngOnDestroy() {
     this.subscription.unsubscribe()

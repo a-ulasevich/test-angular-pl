@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { InMemoryDbService } from 'angular-in-memory-web-api';
-import {Seller} from "../entities/seller";
-import {Invoice} from "../entities/invoice";
-import {Role} from "../entities/role";
+import {Injectable} from '@angular/core';
+import {InMemoryDbService} from 'angular-in-memory-web-api';
+import {Seller} from "../models/seller";
+import {Invoice} from "../models/invoice";
+import {Role} from "../models/role";
 
 @Injectable({
   providedIn: 'root',

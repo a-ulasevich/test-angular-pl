@@ -10,24 +10,24 @@
     </mat-form-field>
   </div>
   <div class="table-block">
-    <table mat-table [dataSource]="dataSource" class="mat-accent" matSort>
+    <table [dataSource]="filteredInvoices" class="mat-accent" mat-table matSort>
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-        <td mat-cell *matCellDef="let element" (click)="openDialog(element)"> {{element.id}} </td>
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>ID</th>
+        <td (click)="openDialog(element)" *matCellDef="let element" mat-cell> {{element.id}} </td>
       </ng-container>
 
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> NAME </th>
-        <td mat-cell *matCellDef="let element" (click)="openDialog(element)"> {{element.seller.name}} </td>
+        <th *matHeaderCellDef mat-header-cell> NAME</th>
+        <td (click)="openDialog(element)" *matCellDef="let element" mat-cell> {{element.seller.name}} </td>
       </ng-container>
 
       <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef> INVOICE AMOUNT </th>
-        <td mat-cell *matCellDef="let element" (click)="openDialog(element)"> {{element.amount}} </td>
+        <th *matHeaderCellDef mat-header-cell> INVOICE AMOUNT</th>
+        <td (click)="openDialog(element)" *matCellDef="let element" mat-cell> {{element.amount}} </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
 
     </table>
   </div>

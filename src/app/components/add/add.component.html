@@ -3,24 +3,24 @@
     <h1>Add Invoice</h1>
   </header>
   <article>
-    <div ngForm #formElement="ngForm" >
-    <table class="meta">
+    <div #formElement="ngForm" ngForm>
+      <table class="meta">
         <tr>
           <th><span>Invoice #</span></th>
           <td>
-            <input matInput required type="text" class="form__input" placeholder="Invoice number" name="id" ngModel>
+            <input class="form__input" matInput name="id" ngModel placeholder="Invoice number" required type="text">
           </td>
         </tr>
         <tr>
           <th><span>Date</span></th>
           <td>
-            <input matInput required type="text" class="form__input" placeholder="Invoice date" name="date" ngModel>
+            <input class="form__input" matInput name="date" ngModel placeholder="Invoice date" required type="text">
           </td>
         </tr>
         <tr>
           <th><span>Seller</span></th>
           <td>
-            <select class="form__input" name="seller" [(ngModel)]="seller">
+            <select [(ngModel)]="seller" class="form__input" name="seller">
               <mat-label>Seller</mat-label>
               <option *ngFor="let element of data" [ngValue]="element">{{element.name}}</option>
             </select>
@@ -41,14 +41,14 @@
         <tr>
           <th><span>Amount</span></th>
           <td>
-            <input matInput name="amount" required type="text" class="form__input" placeholder="Invoice amount" ngModel>
+            <input class="form__input" matInput name="amount" ngModel placeholder="Invoice amount" required type="text">
           </td>
         </tr>
-    </table>
+      </table>
     </div>
   </article>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button [disabled]="formElement.invalid" (click)="submit(formElement)" mat-dialog-close>Save</button>
+  <button (click)="submit(formElement)" [disabled]="formElement.invalid" mat-button mat-dialog-close>Save</button>
   <button mat-button mat-dialog-close>Cancel</button>
 </mat-dialog-actions>

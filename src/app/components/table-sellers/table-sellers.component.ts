@@ -1,12 +1,12 @@
-import {Component,OnInit} from '@angular/core';
-import {Seller} from "../../entities/seller";
+import {Component, OnInit} from '@angular/core';
+import {Seller} from "../../models/seller";
 import {Subscription} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
-import {InvoiceService} from "../../services/invoice.service";
 import {MatIconRegistry} from "@angular/material/icon";
 import {DomSanitizer} from "@angular/platform-browser";
 import {EditComponent} from "../edit/edit.component";
 import {ThumbnailSellersComponent} from "../thumbnail-sellers/thumbnail-sellers.component";
+import {SellerService} from "../../services/seller.service";
 
 const EDIT_ICON = `
 <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
@@ -25,29 +25,29 @@ const EDIT_ICON = `
 })
 export class TableSellersComponent implements OnInit {
 
-  dataSource: Seller[] = [];
+  sellers: Seller[] = [];
+  filteredSellers: Seller[] = [];
+  sellersSelect: Seller[] = [];
   subscription: Subscription = new Subscription();
-  dataSourceFilter: Seller[] = [];
-  filteredValue: Seller = {id: 0, name: "", address: ""};
-  role: string[] = ['test'];
+  filteredValue?: Seller;
+  role: string[] = [''];
+  displayedColumns: string[] = ['id', 'name', 'address', 'action'];
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, public dialog: MatDialog,
-              private invoiceService: InvoiceService) {
+              private sellerService: SellerService) {
     iconRegistry.addSvgIconLiteral('edit', sanitizer.bypassSecurityTrustHtml(EDIT_ICON))
   }
-  ngOnInit(){
-    this.subscription = this.invoiceService.invokeSeller$.subscribe(() => {
-      this.getSellers()
-    })
+
+  ngOnInit() {
     this.getSellers();
   }
 
-
   getSellers(): void {
-    this.invoiceService.getSellers()
+    this.sellerService.getSellers()
       .subscribe(sellers => {
-        this.dataSource = sellers
-        this.dataSourceFilter = sellers
+        this.sellers = sellers
+        this.filteredSellers = sellers
+        this.sellersSelect = sellers
       })
   }
 
@@ -55,24 +55,16 @@ export class TableSellersComponent implements OnInit {
     this.dialog.open(ThumbnailSellersComponent, {data});
   }
 
-  openEdit(data: Seller)
-  {
+  openEdit(data: Seller) {
     console.log(data)
     this.dialog.open(EditComponent, {data})
   }
 
   applyFilter() {
-
-    if (this.filteredValue !== undefined)
-    {
-      this.dataSource = this.dataSourceFilter.filter(seller => seller.id === this.filteredValue.id)
-    }
-    else {
-      this.getSellers()
-    }
+    console.log(this.sellersSelect)
+    this.filteredSellers = this.filteredValue ? this.sellers.filter(seller => seller.id === this.filteredValue?.id) : this.sellers
+    console.log(this.sellersSelect)
   }
-
-  displayedColumns: string[] = ['id', 'name', 'address', 'action'];
 
   ngOnDestroy() {
     this.subscription.unsubscribe()

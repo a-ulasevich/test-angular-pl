@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {InvoiceService} from "../../services/invoice.service";
+import {Component, OnInit} from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {Role} from "../../entities/role";
+import {Role} from "../../models/role";
+import {RoleService} from "../../services/role.service";
 
 @Component({
   selector: 'app-add-role',
@@ -15,25 +15,26 @@ export class AddRoleComponent implements OnInit {
   permissions: string[] = [];
   selected: string[] = [];
 
-  constructor(private invoiceService: InvoiceService) { }
+  constructor(private roleService: RoleService) {
+  }
 
   ngOnInit(): void {
     this.getPermissions();
   }
 
   addRole(name: string, permissions: string[]): void {
-    this.invoiceService.addRole({ name, permissions } as Role)
+    this.roleService.addRole({name, permissions} as Role)
   }
 
   getPermissions(): void {
-    this.invoiceService.getPermissions()
+    this.roleService.getPermissions()
       .subscribe(permissions => {
         this.data = permissions
         this.selected = this.data
       });
   }
 
-  submit(form: NgForm){
+  submit(form: NgForm) {
     console.log(form.value.name, form.value.permissions)
     this.addRole(form.value.name, form.value.permissions);
   }

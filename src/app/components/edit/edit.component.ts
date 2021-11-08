@@ -1,9 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Seller} from "../../entities/seller";
-import {InvoiceService} from "../../services/invoice.service";
+import {Seller} from "../../models/seller";
 import {NgForm} from "@angular/forms";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
-import {NgxPermissionsService} from "ngx-permissions";
+import {SellerService} from "../../services/seller.service";
 
 @Component({
   selector: 'app-edit',
@@ -12,19 +11,21 @@ import {NgxPermissionsService} from "ngx-permissions";
 })
 export class EditComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Seller, private invoiceService: InvoiceService, private ngxPermissionsService: NgxPermissionsService) {}
-
-  ngOnInit() {}
   id: number = this.data.id;
   name: string = this.data.name
   address: string = this.data.address;
 
-  updateSeller(id: number, name: string, address: string): void {
-    this.invoiceService.updateSeller({ id, name, address } as Seller)
-      .subscribe(() => { this.invoiceService.invokeSellerSource.next()})
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Seller, private sellerService: SellerService) {
   }
 
-  submit(form: NgForm){
+  ngOnInit() {
+  }
+
+  updateSeller(id: number, name: string, address: string): void {
+    this.sellerService.updateSeller({id, name, address} as Seller)
+  }
+
+  submit(form: NgForm) {
     console.log(this.data.id, form.value.name, form.value.address)
     this.updateSeller(this.data.id, form.value.name, form.value.address);
   }
