@@ -1,0 +1,32 @@
+<div *ngxPermissionsOnly="'ADMIN'; unauthorisedStrategy: 'disable'; authorisedStrategy: 'enable'">
+  <mat-dialog-content class="mat-typography">
+    <header>
+      <h1>Add Role</h1>
+    </header>
+    <article>
+      <div #formElement="ngForm" ngForm>
+        <table class="meta">
+          <tr>
+            <th><span>Role name</span></th>
+            <td>
+              <input class="form__input" matInput name="name" ngModel placeholder="Role name" required type="text">
+            </td>
+          </tr>
+          <tr>
+            <th><span>Role permissions</span></th>
+            <td>
+              <mat-select [(ngModel)]="selected" multiple name="permissions">
+                <mat-option *ngFor="let permission of data" [value]="permission">{{permission}}</mat-option>
+              </mat-select>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </article>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button (click)="submit(formElement)" [disabled]="formElement.invalid" mat-button mat-dialog-close>Save</button>
+    <button mat-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+
+</div>

@@ -1,0 +1,86 @@
+<mat-dialog-content class="mat-typography">
+  <header>
+    <h1>Add Invoice</h1>
+  </header>
+  <article>
+    <div #formElement="ngForm" ngForm>
+      <table class="meta">
+        <tr>
+          <th><span>Invoice #</span></th>
+          <td>
+            <input #id="ngModel" matInput name="id" ngModel pattern="[0-9]{1,10}" placeholder="Invoice number"
+                   required type="text">
+            <div *ngIf="id.invalid && (id.dirty || id.touched)"
+                 class="alert">
+              <div *ngIf="id.errors?.['required']">
+                Id field is required
+              </div>
+              <div *ngIf="id.errors?.['pattern']">
+                Enter valid number
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th><span>Date</span></th>
+          <td>
+            <input #date="ngModel" matInput name="date" ngModel
+                   placeholder="Invoice date" required type="date">
+            <div *ngIf="date.invalid && (date.dirty || date.touched)"
+                 class="alert">
+              <div *ngIf="date.errors?.['required']">
+                Date field is required.
+              </div>
+              <div *ngIf="date.errors?.['pattern']">
+                Enter valid date
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th><span>Seller</span></th>
+          <td>
+            <select [(ngModel)]="seller" class="form-select" name="seller">
+              <mat-label>Seller</mat-label>
+              <option *ngFor="let element of data" [ngValue]="element">{{element.name}}</option>
+            </select>
+          </td>
+        </tr>
+        <tr *ngIf="seller.id !== 0">
+          <th><span>Seller ID</span></th>
+          <td>
+            {{seller.id}}
+          </td>
+        </tr>
+        <tr *ngIf="seller.address !== ''">
+          <th><span>Seller Address</span></th>
+          <td>
+            {{seller.address}}
+          </td>
+        </tr>
+
+        <tr>
+          <th><span>Amount</span></th>
+          <td>
+            <input #amount="ngModel" matInput name="amount" ngModel pattern="[0-9]{1,10}" placeholder="Invoice amount"
+                   required
+                   type="text">
+            <div *ngIf="amount.invalid && (amount.dirty || amount.touched)"
+                 class="alert">
+              <div *ngIf="amount.errors?.['required']">
+                Amount field is required
+              </div>
+              <div *ngIf="amount.errors?.['pattern']">
+                Enter valid amount
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </article>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button (click)="submit(formElement)" [disabled]="formElement.invalid" mat-button mat-dialog-close>Save</button>
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
